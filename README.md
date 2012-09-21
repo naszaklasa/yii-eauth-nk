@@ -163,6 +163,12 @@ The implementation of the authorization on your own server has several advantage
 					'client_secret' => '...',
 					'title' => 'Odnokl.',
 				),
+				'nk' => array(
+					// register your app here: https://developers.nk.pl/developers/oauth2client/form
+					'class' => 'NKOAuthService',
+					'client_id' => '...',
+					'client_secret' => '...',
+				),
 			),
 		),
 		...
