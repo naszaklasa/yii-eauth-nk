@@ -46,28 +46,20 @@ class NKOAuthService extends EOAuth2Service {
 			$req->sign_request(new OAuthSignatureMethod_HMAC_SHA1(), $consumer, null);
 		
 			$auth_header = $req->to_header();
-			$headers = array($auth_header, 'Content-Type: <a title="application" href="http://developers.nk.pl/pl/tag/application/">application</a>/json');
+			$options['headers'] = array($auth_header, 'Content-Type: application/json');
 		
 			$url = $url . "?" . OAuthUtil::build_http_query($params);
+			
+			return $this->makeRequest($url, $options);
 		
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		
-			$string = curl_exec($ch);
-			curl_close($ch);
-			$data = json_decode($string, true);
-		
-			return $data['entry'];
 		}
 	}
 	
 	protected function fetchAttributes() {
 		$info = (object) $this->makeSignedRequest('http://opensocial.nk-net.pl/v09/social/rest/people/@me', 'id,age,name,currentLocation,emails');
 	
-		$this->attributes['id'] = $info->id;
-		$this->attributes['name'] = $info->displayName;
+		$this->attributes['id'] = $info->entry->id;
+		$this->attributes['name'] = $info->entry->displayName;
 		
 	}
 	
