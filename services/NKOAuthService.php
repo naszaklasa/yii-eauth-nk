@@ -5,7 +5,7 @@
  * Register application: https://developers.nk.pl/developers/oauth2client/form
  * 
  * 
- * @author Marek Ziółkowski <ziol3k@gmail.com>
+ * @author Marek Ziółkowski
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
 
